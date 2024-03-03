@@ -5,6 +5,8 @@ pipeline {
   }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('Dockerhub')
+        DOCKER_PATH = sh(script: 'which docker', returnStdout: true).trim()
+        PATH = "${DOCKER_PATH}:${PATH}"
         }
 
     stages {
