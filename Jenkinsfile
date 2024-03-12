@@ -22,7 +22,7 @@ pipeline {
 
         stage('Pulling base image from Dockerhub') {
             steps {
-                    sh 'docker pull gradproj/nrf-base'
+                    sh 'docker pull 5ggraduationproject/nrf-base'
             }
         }
 
