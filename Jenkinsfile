@@ -71,7 +71,7 @@ pipeline {
             // Archiving Test Result
             archiveArtifacts artifacts: 'trivy-report.json', fingerprint: true
             sh 'docker rmi 5ggraduationproject/5g-nrf'
-            sh 'docker rmi gradproj/nrf-base'
+            sh 'docker rmi 5ggraduationproject/nrf-base'
         }
     }
 }
