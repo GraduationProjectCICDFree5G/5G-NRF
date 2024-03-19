@@ -35,15 +35,13 @@ data:
         registerIPv4: {{ $.Values.global.nrf.service.name }} # IP used to serve NFs or register to another NRF
         bindingIPv4: 0.0.0.0  # IP used to bind the service
         port: {{ $.Values.global.nrf.service.port }}
-        tls:
-          key: cert/nrf.key
-          pem: cert/nrf.pem
+        cert:
+          key: ../cert/nrf.key
+          pem: ../cert/nrf.pem
 
       {{- .configuration.configuration | nindent 6 }}
 
     logger:
-      enable: true
-      level: info
-      reportCaller: false
+      {{- toYaml .configuration.logger | nindent 6 }}
 
 {{- end }}
