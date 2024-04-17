@@ -18,6 +18,7 @@ RUN mkdir -p config/ log/ cert/
 COPY --from=builder /free5gc/${F5GC_MODULE} ./
 COPY --from=builder /free5gc/cert/${F5GC_MODULE}.pem ./cert/
 COPY --from=builder /free5gc/cert/${F5GC_MODULE}.key ./cert/
+COPY --from=builder /free5gc/config/nrfcfg.yaml ./config/
 
 # Config files volume
 VOLUME [ "/free5gc/config" ]
