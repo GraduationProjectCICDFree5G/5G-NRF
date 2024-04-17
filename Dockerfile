@@ -1,20 +1,17 @@
 FROM 5ggraduationproject/free5gc-base AS builder
 FROM alpine:3.13.6
 
-ENV F5GC_MODULE nrf
-ARG DEBUG_TOOLS
+LABEL maintainer="raoufkh <khichane.araouf@gmail.com>"
 
-# Install debug tools ~ 100MB (if DEBUG_TOOLS is set to true)
-RUN if [ "$DEBUG_TOOLS" = "true" ] ; then apk add -U vim strace net-tools curl netcat-openbsd ; fi
+ENV GIN_MODE="release"
 
-# Set working dir
 WORKDIR /free5gc
-RUN mkdir -p config/ log/ cert/
+RUN mkdir -p log/ cert/ nrf/
 
 # Copy executable and default certs
-COPY --from=builder /free5gc/${F5GC_MODULE} ./
-COPY --from=builder /free5gc/cert/${F5GC_MODULE}.pem ./cert/
-COPY --from=builder /free5gc/cert/${F5GC_MODULE}.key ./cert/
+COPY --from=builder /free5gc/nrf ./nrf
+COPY --from=builder /free5gc/cert/nrf.pem ./cert/
+COPY --from=builder /free5gc/cert/nrf.key ./cert/
 COPY --from=builder /free5gc/config/nrfcfg.yaml ./config/
 
 VOLUME [ "/free5gc/config" ]
