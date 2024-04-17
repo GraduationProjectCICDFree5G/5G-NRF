@@ -22,7 +22,7 @@ pipeline {
 
         stage('Pulling base image from Dockerhub') {
             steps {
-                    sh 'docker pull 5ggraduationproject/free5gc-base'
+                    sh 'docker pull 5ggraduationproject/nrf-base'
             }
         }
 
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh(script: """
                     docker images -a
-                    docker build -t 5ggraduationproject/free5gc-nrf:latest . 
+                    docker build -t 5ggraduationproject/5g-nrf:latest . 
                     docker images -a
                 """)
             }
@@ -38,12 +38,12 @@ pipeline {
 
         stage('Scan Image for Common Vulnerabilities and Exposures') {
             steps {
-                sh 'trivy image 5ggraduationproject/free5gc-nrf --output trivy-report.json'
+                sh 'trivy image 5ggraduationproject/5g-nrf --output trivy-report.json'
             }
         }
         stage('Pushing to Dockerhub') {
             steps {
-                sh 'docker push 5ggraduationproject/free5gc-nrf:latest'
+                sh 'docker push 5ggraduationproject/5g-nrf:latest'
             }
         }
 
@@ -70,7 +70,7 @@ pipeline {
         always {
             // Archiving Test Result
             archiveArtifacts artifacts: 'trivy-report.json', fingerprint: true
-            sh 'docker rmi 5ggraduationproject/free5gc-nrf'
+            sh 'docker rmi 5ggraduationproject/5g-nrf'
             sh 'docker rmi 5ggraduationproject/free5gc-base'
         }
     }
