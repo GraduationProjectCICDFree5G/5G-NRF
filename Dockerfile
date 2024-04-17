@@ -1,4 +1,4 @@
-FROM 5ggraduationproject/free5gc-base AS builder
+FROM 5ggraduationproject/free5gc-base:latest  AS builder
 FROM alpine:3.13.6
 
 LABEL maintainer="raoufkh <khichane.araouf@gmail.com>"
