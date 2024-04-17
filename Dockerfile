@@ -12,7 +12,6 @@ RUN mkdir -p log/ cert/ nrf/
 COPY --from=builder /free5gc/nrf ./nrf
 COPY --from=builder /free5gc/cert/nrf.pem ./cert/
 COPY --from=builder /free5gc/cert/nrf.key ./cert/
-COPY --from=builder /free5gc/config/nrfcfg.yaml ./config/
 
 VOLUME [ "/free5gc/config" ]
 #VOLUME [ "/free5gc/config/TLS" ]
